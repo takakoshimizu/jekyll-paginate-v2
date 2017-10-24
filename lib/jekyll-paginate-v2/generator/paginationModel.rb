@@ -249,8 +249,10 @@ module Jekyll
         end
         
         # remove the most recent featured post from consideration.
-        featured_post = using_posts.find { |p| p.data['featured'] }
-        using_posts = using_posts.select { |p| p != featured_post } if featured_post
+        unless config['category'] or config['tag']
+          featured_post = using_posts.find { |p| p.data['featured'] }
+          using_posts = using_posts.select { |p| p != featured_post } if featured_post
+        end
                
         # Calculate the max number of pagination-pages based on the configured per page value
         total_pages = Utils.calculate_number_of_pages(using_posts, config['per_page'])
