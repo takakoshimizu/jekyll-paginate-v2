@@ -249,7 +249,7 @@ module Jekyll
         end
         
         # remove the most recent featured post from consideration.
-        featured_post = using_posts.find { |p| p.featured }
+        featured_post = using_posts.find { |p| p.data['featured'] }
         using_posts = using_posts.select { |p| p != featured_post } if featured_post
                
         # Calculate the max number of pagination-pages based on the configured per page value
